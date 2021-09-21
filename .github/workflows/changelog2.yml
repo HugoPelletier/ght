@@ -1,17 +1,29 @@
-name: Changelog2
+name: CI - Changelog
 
 on:
   push:
-    branch:
-      - 'main'
+    branches: [ main ]
 
 jobs:
-  # Enforces the update of a changelog file on every pull request
-  changelog:
+  changelog_prerelease:
+    name: Update Changelog For Prerelease
     runs-on: ubuntu-latest
     steps:
-    - name: "Build Changelog"
-      id: build_changelog
-      uses: mikepenz/release-changelog-builder-action@v2.4.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Update Changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issues: true
+          issuesWoLabels: true
+          pullRequests: true
+          prWoLabels: true
+          unreleased: true
+          addSections: '{"documentation":{"prefix":"**Documentation:**","labels":["documentation"]}}'
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update Changelog for PR
+          file_pattern: CHANGELOG.md
