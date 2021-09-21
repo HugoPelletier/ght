@@ -22,7 +22,7 @@ jobs:
           pullRequests: true
           prWoLabels: true
           unreleased: true
-          addSections: '{"documentation":{"prefix":"**Documentation:**","labels":["documentation"]}}'
+          compareLink: true
           includeLabels: 'feat,fix,refactor'
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
