@@ -22,8 +22,8 @@ jobs:
           pullRequests: true
           prWoLabels: true
           unreleased: true
-          compareLink: true
           includeLabels: 'feat,fix,refactor'
+          stripGeneratorNotice: true
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update Changelog for PR
