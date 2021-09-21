@@ -1,0 +1,20 @@
+name: Git Cliff - Changelog
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate a changelog
+      uses: orhun/git-cliff-action@v1
+      with:
+        config: cliff.toml
+        args: --verbose
+      env:
+        OUTPUT: CHANGELOG.md
+
+    

@@ -22,7 +22,6 @@ jobs:
           pullRequests: true
           prWoLabels: true
           unreleased: true
-          includeLabels: 'feat,fix,refactor'
           stripGeneratorNotice: true
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
