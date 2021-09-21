@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/HugoPelletier/ght/compare/v0.2.0...v0.2.1) (2021-09-21)
+
+
+### Bug Fixes
+
+* missing main entrypoint in the script ([f64dbc8](https://github.com/HugoPelletier/ght/commit/f64dbc895dffb7fad4c0d758efb54868fbd17e0f))
+
+
+
 # [0.2.0](https://github.com/HugoPelletier/ght/compare/v0.1.0...v0.2.0) (2021-09-21)
 
 
