@@ -9,13 +9,13 @@ jobs:
     name: Generate changelog
     runs-on: ubuntu-latest
     steps:
+      - uses: rlespinasse/git-commit-data-action@v1.x
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
       - name: Setup Git config
-        uses: rlespinasse/git-commit-data-action@v1.x
         env:
           CI_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
           CI_EMAIL: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
