@@ -15,6 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
+    - uses: rlespinasse/git-commit-data-action@v1.x
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -26,7 +27,6 @@ jobs:
         python -m auto_changelog -u
 
     - name: Commit files
-      uses: rlespinasse/git-commit-data-action@v1.x
       env:
         CI_USER: ${{ env.GIT_COMMIT_AUTHOR }}
         CI_EMAIL: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
