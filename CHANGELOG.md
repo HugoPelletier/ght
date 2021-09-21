@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/HugoPelletier/ght/compare/v0.2.1...v0.3.0) (2021-09-21)
+
+
+### Features
+
+* Add constructor ([3f97f36](https://github.com/HugoPelletier/ght/commit/3f97f36e411412b0616832606d5a95a4a1f3c023))
+
+
+
 ## [0.2.1](https://github.com/HugoPelletier/ght/compare/v0.2.0...v0.2.1) (2021-09-21)
 
 
