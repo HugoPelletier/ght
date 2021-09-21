@@ -1,4 +1,4 @@
-name: Changelog
+name: Changelog2
 
 on:
   push:
@@ -10,6 +10,9 @@ jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
-    # The checkout step is required since this action uses local git commands to enforce the changelog
-    - uses: actions/checkout@v2
-    - uses: dangoslen/changelog-enforcer@v2
+    - name: "Build Changelog"
+      id: build_changelog
+      uses: mikepenz/release-changelog-builder-action@{latest-release}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
