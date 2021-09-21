@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/HugoPelletier/ght/compare/v0.1.0...v0.2.0) (2021-09-21)
+
+
+### Features
+
+* workflow 4 ([1b1d587](https://github.com/HugoPelletier/ght/commit/1b1d587faa0b32227ebec4422fe836403613223b))
+
+
+
 # [0.1.0](https://github.com/HugoPelletier/ght/compare/v0.0.1...v0.1.0) (2021-09-21)
 
 
