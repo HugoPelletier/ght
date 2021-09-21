@@ -9,16 +9,16 @@ All notable changes to this project will be documented in this file.\n
 # template for the changelog body
 # https://tera.netlify.app/docs/#introduction
 body = """
+{{ .Info.RepositoryURL }}
 {% if version %}\
-    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }}\
-    [Full changelog](/release/tag/{{ version }})
+    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }} [Full changelog](/release/tag/{{ version }})
 {% else %}\
     ## [unreleased]
 {% endif %}\
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {% for commit in commits %}
-        - {{ commit.message | upper_first }} -- [commit.id | truncate(length=10)](commit.id)\
+        - {{ commit.message | upper_first }} -- [{{ commit.id | truncate(length=10) }}]({{ commit.id }})\
     {% endfor %}
 {% endfor %}\n
 """
