@@ -10,14 +10,15 @@ All notable changes to this project will be documented in this file.\n
 # https://tera.netlify.app/docs/#introduction
 body = """
 {% if version %}\
-    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }}\
+    [Full changelog](/release/tag/{{ version }})
 {% else %}\
     ## [unreleased]
 {% endif %}\
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {% for commit in commits %}
-        - {{ commit.message | upper_first }} -- link\
+        - {{ commit.message | upper_first }} -- [commit.id | truncate(length=10)](commit.id)\
     {% endfor %}
 {% endfor %}\n
 """
@@ -51,3 +52,5 @@ filter_commits = true
 tag_pattern = "v[0-9]*"
 # regex for skipping tags
 skip_tags = "v0.1.0-beta.1"
+# display breaking change
+breaking = true
