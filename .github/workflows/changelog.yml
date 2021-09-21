@@ -6,31 +6,29 @@ on:
       - 'main'
 
 jobs:
-  generate_changelog:
+  build:
     runs-on: ubuntu-latest
-    name: Generate changelog for master branch
+    strategy:
+      matrix:
+        # in this example, there is a newer version already installed, 3.7.7, so the older version will be downloaded
+        python-version: ['3.9']
     steps:
-      - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - uses: fregante/setup-git-user@v1
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name:
+      run: |
+        echo "Install package"
+        pip install auto-changelog
+        echo "Generate changelog"
+        python -m auto_changelog -u
 
-      - name: Generate changelog
-        uses: charmixer/auto-changelog-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit files
+    - name: Commit files
         env:
-          CI_USER: "HugoPelletier"
-          CI_EMAIL: "hpelleti@gmail.com"
+          CI_USER: ${{ secrets.GITHUB_USER }}
+          CI_EMAIL: ${{ secrets.GITHUB_EMAIL }}
         run: |
-          echo $CI_USER
-          git config --local user.email "$CI_EMAIL"
-          git config --local user.name "$CI_USER"
-          git add CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo "push=true" >> $GITHUB_ENV || echo "No changes to CHANGELOG.md"
-
-      - name: Push changes
-        if: env.push == 'true'
-        env:
-          CI_USER: "HugoPelletier"
-          CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:main
+          git add CHANGELOG.md && git commit -m 'chore: Updated CHANGELOG.md' echo "No changes to CHANGELOG.md"
+          git push HEAD:main
