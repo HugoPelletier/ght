@@ -2,11 +2,15 @@
 
 ## [Unreleased](https://github.com/HugoPelletier/ght/tree/HEAD)
 
+[Full Changelog](https://github.com/HugoPelletier/ght/compare/v0.0.1...HEAD)
+
 **Merged pull requests:**
 
 - feat: add main entrypoint for the application. [\#1](https://github.com/HugoPelletier/ght/pull/1)
 
 ## [v0.0.1](https://github.com/HugoPelletier/ght/tree/v0.0.1) (2021-09-21)
+
+[Full Changelog](https://github.com/HugoPelletier/ght/compare/a8887d9b8fbc59dca7343c58538dd9c516758743...v0.0.1)
 
 
 
