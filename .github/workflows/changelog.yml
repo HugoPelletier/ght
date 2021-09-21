@@ -26,6 +26,21 @@ jobs:
         echo "Generate changelog"
         python -m auto_changelog -u
 
+    - name: Print git commit data
+      run: |
+        echo "Get author info"
+        echo " - ${{ env.GIT_COMMIT_AUTHOR }}"
+        echo " - ${{ env.GIT_COMMIT_AUTHOR_NAME }}"
+        echo " - ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}"
+        echo "Get committer info"
+        echo " - ${{ env.GIT_COMMIT_COMMITTER }}"
+        echo " - ${{ env.GIT_COMMIT_COMMITTER_NAME }}"
+        echo " - ${{ env.GIT_COMMIT_COMMITTER_EMAIL }}"
+        echo "Get message info"
+        echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT }}"
+        echo " - ${{ env.GIT_COMMIT_MESSAGE_SUBJECT_SANITIZED }}"
+        echo " - ${{ env.GIT_COMMIT_MESSAGE_BODY }}"
+
     - name: Commit files
       env:
         CI_USER: ${{ env.GIT_COMMIT_AUTHOR }}
