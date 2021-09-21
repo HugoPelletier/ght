@@ -2,6 +2,6 @@
 
 ## Unreleased (2021-09-21)
 
-#### Fixes
+#### New Features
 
-* workflow 17
+* workflow2
