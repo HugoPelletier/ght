@@ -43,7 +43,7 @@ jobs:
 
     - name: Commit files
       env:
-        CI_USER: ${{ env.GIT_COMMIT_AUTHOR }}
+        CI_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
         CI_EMAIL: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
       run: |
         git config user.name "$CI_USER"
@@ -53,7 +53,7 @@ jobs:
     - name: Push changes
       if: env.push == 'true'
       env:
-        CI_USER: ${{ env.GIT_COMMIT_AUTHOR }}
+        CI_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
         CI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:main
