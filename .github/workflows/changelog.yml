@@ -19,13 +19,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name:
-      run: |
-        echo "Install package"
-        pip install auto-changelog
-        echo "Generate changelog"
-        python -m auto_changelog -u
-
     - name: Setup Git config
       env:
         CI_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
@@ -35,18 +28,21 @@ jobs:
         git config user.email "$CI_USER"
 
     - name: Fetch git info
-        git fetch --all
+      run: git fetch --all
 
-    - name: Commit files
+    - name: Generate CHANGELOG file
       run: |
-        git config user.name "$CI_USER"
-        git config user.email "$CI_USER"
-        git add CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo "push=true" >> $GITHUB_ENV || echo "No changes to CHANGELOG.md"
+        echo "Install package"
+        pip install auto-changelog
+        echo "Generate changelog"
+        python -m auto_changelog -u
 
-    - name: Push changes
+    - name: Commit file
+      run: git add CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo "push=true" >> $GITHUB_ENV || echo "No changes to CHANGELOG.md"
+
+    - name: Push change
       if: env.push == 'true'
       env:
         PUSH_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
         PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git push "https://$PUSH_USER:$PUSH_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:main
+      run: git push "https://$PUSH_USER:$PUSH_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:main
