@@ -9,10 +9,19 @@ jobs:
     name: Generate changelog
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: rlespinasse/git-commit-data-action@v1.x
       - name: Checkout
-        uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Setup Git config
+        env:
+          CI_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
+          CI_EMAIL: ${{ env.GIT_COMMIT_AUTHOR_EMAIL }}
+        run: |
+          git config user.name "$CI_USER"
+          git config user.email "$CI_USER"
 
       - name: Generate a changelog
         uses: orhun/git-cliff-action@v1
@@ -24,5 +33,15 @@ jobs:
           OUTPUT: CHANGELOG.md
 
       - name: Print the changelog
-        run: cat "${{ steps.git-cliff.outputs.changelog }}"
+        run: cat "${{ steps.git-cliff.outputs.changelog }}" > CHANGELOG.md
+
+      - name: Commit file
+        run: git add CHANGELOG.md && git commit -m 'Updated CHANGELOG.md' && echo "push=true" >> $GITHUB_ENV || echo "No changes to CHANGELOG.md"
+
+      - name: Push change
+        if: env.push == 'true'
+        env:
+          PUSH_USER: ${{ env.GIT_COMMIT_AUTHOR_NAME }}
+          PUSH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: git push "https://$PUSH_USER:$PUSH_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:main
     

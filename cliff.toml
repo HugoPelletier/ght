@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.\n
 # https://tera.netlify.app/docs/#introduction
 body = """
 {% if version %}\
-    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }} [Full changelog](/release/tag/{{ version }})
+    ## [{{ version | replace(from="v", to="") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
 {% else %}\
     ## [unreleased]
 {% endif %}\
@@ -48,7 +48,7 @@ commit_parsers = [
     { message = "^style", group = "Styling", skip = true},
     { message = "^test", group = "Testing", skip = true},
     { message = "^chore\\(release\\): prepare for", skip = true},
-    { message = "^chore", group = "Miscellaneous Tasks"},
+    { message = "^chore", group = "Miscellaneous Tasks", skip = true},
     { body = ".*security", group = "Security"},
 ]
 # filter out the commits that are not matched by commit parsers
