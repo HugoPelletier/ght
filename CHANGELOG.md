@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Add worflow 5 ([1641192](164119271e60aff83ba1714a62f33065e3603c24))
 - Update template config ([1d1605f](1d1605fa8098603ee504b128a5e2037e00c4ac81))
 - Update template config 2 ([5d56c1f](5d56c1f749aa366b4f8545bcf2e312594ad7ed95))
+- Documentation update ([d0496e7](d0496e77d01c3ac35ba9666ed965912589c1a8d2))
 
 ## [0.3.0] - 2021-09-21
 
